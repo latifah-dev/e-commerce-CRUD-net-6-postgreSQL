@@ -1,0 +1,48 @@
+@using System.Collections;
+@model IEnumerable<PALUGADA.Datas.Entities.Penjual>
+@{ ViewData["Title"] = "Home Page";}
+@if (TempData["ResultOk"] != null) { <h1 class="alert-success">@TempData["ResultOk"]</h1>}
+<div class="container shadow p-5">
+    <h1 class="text-center mb-3">Mau Lihat Data Penjual? Scroll Aja ke Bawah. </h1>
+    <div class="col mb-3">
+        <a asp-controller="Penjual" asp-action="Create" class="btn btn-lg btn-primary"><i class="bi bi-file-plus-fill"></i>Tambah Penjual</a>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Kode Toko</th>
+                <th scope="col">Nama Toko</th>
+                <th scope="col">Alamat Toko</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+@if(Model != null)
+{
+@foreach (var item in Model) 
+{
+                <tr>
+                    <td width="20%">
+                        @item.KodeToko
+                    </td>
+                    <td width="20%">
+                        @item.NamaToko
+                    </td>
+                    <td width="25%">
+                        @item.AlamatToko
+                    </td>
+                    <td>
+                        <div role="group" class="w-60 btn-group">
+                            <a asp-controller="Penjual" asp-action="Detail" asp-route-id="@item.IdPenjual" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Detail</a>&nbsp;
+                            <a asp-controller="Penjual" asp-action="Edit" asp-route-id="@item.IdPenjual" class=" btn btn-sm btn-primary"><i class="bi bi-pencil-square"></i>Edit</a>&nbsp;
+                            <a asp-controller="Penjual" asp-action="Delete" asp-route-id="@item.IdPenjual" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i>Delete</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+            }else{
+    <h1>Data barang null</h1>
+    }
+        </tbody>
+    </table>
+</div>

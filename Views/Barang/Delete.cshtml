@@ -1,0 +1,69 @@
+@model PALUGADA.Datas.Entities.Barang
+
+
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Hapus Barang Jualanmu !</h2>
+    </div>
+
+    <form method="post" asp-action="DeleteBr">
+        <input asp-for="IdBarang" hidden />
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="KodeBarang">Kode Barang</label>
+                <input type="text" class="form-control mb-3" asp-for="KodeBarang" disabled>
+                <span asp-validation-for="KodeBarang" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="NamaBarang">Nama Barang</label>
+                <input type="text" class="form-control mb-3" asp-for="NamaBarang" disabled>
+                <span asp-validation-for="NamaBarang" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="JenisBarang">Jenis Barang</label>
+                <input type="text" class="form-control mb-3" asp-for="JenisBarang" disabled>
+                <span asp-validation-for="JenisBarang" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="HargaBarang">Harga Barang</label>
+                <input type="text" class="form-control mb-3" asp-for="HargaBarang" disabled>
+                <span asp-validation-for="HargaBarang" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="StokBarang">Stok Barang</label>
+                <input type="text" class="form-control mb-3" asp-for="StokBarang" disabled>
+                <span asp-validation-for="StokBarang" class=" alert-danger"></span>
+            </div>
+            
+            <div class="form-group col-md-6">
+                <label asp-for="GambarBarang">Gambar Barang</label>
+                <input type="text" class="form-control mb-3" asp-for="GambarBarang" disabled>
+                <span asp-validation-for="GambarBarang" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="IdPenjual">Id Penjual</label>
+                <input type="text" class="form-control mb-3" asp-for="IdPenjual" disabled>
+                <span asp-validation-for="IdPenjual" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="DeskripsiBarang">Deskripsi Barang</label>
+                <input type="text" class="form-control mb-3" asp-for="DeskripsiBarang" disabled>
+                <span asp-validation-for="DeskripsiBarang" class=" alert-danger"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Delete</button>
+        <a asp-controller="Barang" asp-action="Index" class="btn btn-lg btn-warning p-2">Back To List</a>
+    </form>
+
+</div>
+
+
+@*//for front end validations*@
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}

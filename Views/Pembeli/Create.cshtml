@@ -1,0 +1,52 @@
+@model PALUGADA.Datas.Entities.Pembeli
+
+
+<div class="container shadow p-5">
+    <div class="row pb-2">
+        <h2>Tambah Data Pembeli !</h2>
+    </div>
+
+    <form method="post">
+        <div asp-validation-summary="All"></div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label asp-for="NamaPembeli">Nama Pembeli</label>
+                <input type="text" class="form-control mb-3" asp-for="NamaPembeli" placeholder="Masukkan Nama Pembeli">
+                <span asp-validation-for="NamaPembeli" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="AlamatPembeli">Alamat Pembeli</label>
+                <input type="text" class="form-control mb-3" asp-for="AlamatPembeli" placeholder="Masukkan alamat pembeli">
+                <span asp-validation-for="AlamatPembeli" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="NotelpPembeli">No Telp Pembeli</label>
+                <input type="text" class="form-control mb-3" asp-for="NotelpPembeli" placeholder="Masukkan No Telp Pembeli">
+                <span asp-validation-for="NotelpPembeli" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="NegaraPembeli">Negara Pembeli</label>
+                <input type="text" class="form-control mb-3" asp-for="NegaraPembeli" placeholder="Masukkan Negara Pembeli">
+                <span asp-validation-for="NegaraPembeli" class=" alert-danger"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label asp-for="IdUser">Id User</label>
+                <input type="text" class="form-control mb-3" asp-for="IdUser" placeholder="Masukkan Id User">
+                <span asp-validation-for="IdUser" class=" alert-danger"></span>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-lg btn-primary p-2"><i class="bi bi-file-plus-fill"></i>Save</button>
+        <a asp-controller="Pembeli" asp-action="Index" class="btn btn-lg btn-warning p-2">Back To List</a>
+    </form>
+
+</div>
+
+
+@*//for front end validations*@
+
+@section Scripts{
+    @{
+    <partial name="_ValidationScriptsPartial" />
+    }
+}
