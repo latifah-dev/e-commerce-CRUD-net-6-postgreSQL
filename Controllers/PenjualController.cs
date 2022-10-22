@@ -3,14 +3,14 @@ using Microsoft.AspNetCore.Mvc;
 using PALUGADA.Datas;
 using PALUGADA.Datas.Entities;
 using PALUGADA.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PALUGADA.Controllers;
-
 public class PenjualController : Controller
 {
-    private readonly DBPALUGADAContext _dbContext;
+    private readonly palugadaDBContext _dbContext;
 
-    public PenjualController( DBPALUGADAContext dbContext)
+    public PenjualController( palugadaDBContext dbContext)
     {
         _dbContext = dbContext;
     }

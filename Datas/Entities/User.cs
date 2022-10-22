@@ -15,8 +15,8 @@ namespace PALUGADA.Datas.Entities
         public string? Username { get; set; }
         public string? Password { get; set; }
         public string? NohpUser { get; set; }
-        public string? TipeUser { get; set; }
         public string? EmailUser { get; set; }
+        public string? TipeUser { get; set; }
 
         public virtual ICollection<Pembeli> Pembelis { get; set; }
         public virtual ICollection<Penjual> Penjuals { get; set; }

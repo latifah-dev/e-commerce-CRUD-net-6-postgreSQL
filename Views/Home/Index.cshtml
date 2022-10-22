@@ -1,8 +1,40 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
-
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+@using System.Collections;
+@model IEnumerable<PALUGADA.Datas.Entities.Barang>
+@{ ViewData["Title"] = "Home Page";}
+@if (TempData["ResultOk"] != null) { <h1 class="alert-success">@TempData["ResultOk"]</h1>}
+<div class="container shadow p-5">
+    <h1 class="text-center mb-3">Mau Lihat Barang-Barang Murah? Scroll Aja ke Bawah. </h1>
+<section class="product_section layout_padding">
+    <div class="container">
+      <div class="row">
+@if(Model != null)
+{
+@foreach (var item in Model) 
+{
+<div class="col-sm-6 col-lg-4">
+        <div class="box">
+            <div class="img-box">
+              <img src=@item.UrlGambar alt="" width="200" height="200">
+            </div>
+            <div class="detail-box">
+              <span class="rating">
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star" aria-hidden="true"></i>
+                <i class="fa fa-star-half-o" aria-hidden="true"></i>
+              </span>
+              <a href="">@item.NamaBarang</a>
+              <div class="price_box"><h6 class="price_heading"><span>Rp</span> @item.HargaBarang</h6></div>
+              <div class="btn-box"><a asp-controller="Barang" asp-action="Detail" asp-route-id="@item.IdBarang"> Detail </a></div>
+            </div>
+        </div>
 </div>
+            }
+            }else{
+    <h1>Data barang null</h1>
+    }
+      </div>
+        <div class="btn-box"><h3 class="text-center mb-3"><a href="">View All</a></h3></div>
+  </div>
+</section>

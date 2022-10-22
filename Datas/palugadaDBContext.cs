@@ -6,13 +6,13 @@ using PALUGADA.Datas.Entities;
 
 namespace PALUGADA.Datas
 {
-    public partial class DBPALUGADAContext : DbContext
+    public partial class palugadaDBContext : DbContext
     {
-        public DBPALUGADAContext()
+        public palugadaDBContext()
         {
         }
 
-        public DBPALUGADAContext(DbContextOptions<DBPALUGADAContext> options)
+        public palugadaDBContext(DbContextOptions<palugadaDBContext> options)
             : base(options)
         {
         }
@@ -27,7 +27,7 @@ namespace PALUGADA.Datas
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
-                optionsBuilder.UseNpgsql("Server=localhost; Port=5432; Database=DBPALUGADA; User Id=postgres; Password=lupakatasandi;");
+                optionsBuilder.UseNpgsql("Server=localhost; Port=5432; Database=palugadaDB; User Id=postgres; Password=lupakatasandi;");
             }
         }
 
@@ -47,7 +47,7 @@ namespace PALUGADA.Datas
                 entity.Property(e => e.DeskripsiBarang).HasColumnName("deskripsi_barang");
 
                 entity.Property(e => e.GambarBarang)
-                    .HasColumnType("oid")
+                    .HasColumnType("character varying")
                     .HasColumnName("gambar_barang");
 
                 entity.Property(e => e.HargaBarang).HasColumnName("harga_barang");
@@ -68,6 +68,10 @@ namespace PALUGADA.Datas
 
                 entity.Property(e => e.StokBarang).HasColumnName("stok_barang");
 
+                entity.Property(e => e.UrlGambar)
+                    .HasColumnType("character varying")
+                    .HasColumnName("url_gambar");
+
                 entity.HasOne(d => d.IdPenjualNavigation)
                     .WithMany(p => p.Barangs)
                     .HasForeignKey(d => d.IdPenjual)
@@ -77,20 +81,20 @@ namespace PALUGADA.Datas
             modelBuilder.Entity<Pembeli>(entity =>
             {
                 entity.HasKey(e => e.IdPembeli)
-                    .HasName("Pembeli_pkey");
+                    .HasName("pembeli_pk");
 
                 entity.ToTable("Pembeli");
 
                 entity.Property(e => e.IdPembeli)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id_pembeli");
+                    .HasColumnName("id_pembeli")
+                    .HasDefaultValueSql("nextval('pembeli_id_pembeli_seq'::regclass)");
 
                 entity.Property(e => e.AlamatPembeli).HasColumnName("alamat_pembeli");
 
                 entity.Property(e => e.IdUser).HasColumnName("id_user");
 
                 entity.Property(e => e.NamaPembeli)
-                    .HasMaxLength(30)
+                    .HasColumnType("character varying")
                     .HasColumnName("nama_pembeli");
 
                 entity.Property(e => e.NegaraPembeli)
@@ -110,24 +114,24 @@ namespace PALUGADA.Datas
             modelBuilder.Entity<Penjual>(entity =>
             {
                 entity.HasKey(e => e.IdPenjual)
-                    .HasName("Penjual_pkey");
+                    .HasName("penjual_pk");
 
                 entity.ToTable("Penjual");
 
                 entity.Property(e => e.IdPenjual)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id_penjual");
+                    .HasColumnName("id_penjual")
+                    .HasDefaultValueSql("nextval('penjual_id_penjual_seq'::regclass)");
 
                 entity.Property(e => e.AlamatToko).HasColumnName("alamat_toko");
 
                 entity.Property(e => e.IdUser).HasColumnName("id_user");
 
                 entity.Property(e => e.KodeToko)
-                    .HasMaxLength(10)
+                    .HasColumnType("character varying")
                     .HasColumnName("kode_toko");
 
                 entity.Property(e => e.NamaToko)
-                    .HasMaxLength(30)
+                    .HasColumnType("character varying")
                     .HasColumnName("nama_toko");
 
                 entity.HasOne(d => d.IdUserNavigation)
@@ -139,13 +143,11 @@ namespace PALUGADA.Datas
             modelBuilder.Entity<User>(entity =>
             {
                 entity.HasKey(e => e.IdUser)
-                    .HasName("User_pkey");
+                    .HasName("user_pk");
 
                 entity.ToTable("User");
 
-                entity.Property(e => e.IdUser)
-                    .ValueGeneratedNever()
-                    .HasColumnName("id_user");
+                entity.Property(e => e.IdUser).HasColumnName("id_user");
 
                 entity.Property(e => e.EmailUser)
                     .HasColumnType("character varying")
@@ -156,19 +158,16 @@ namespace PALUGADA.Datas
                     .HasColumnName("nohp_user");
 
                 entity.Property(e => e.Password)
-                    .HasMaxLength(30)
-                    .HasColumnName("password")
-                    .IsFixedLength();
+                    .HasColumnType("character varying")
+                    .HasColumnName("password");
 
                 entity.Property(e => e.TipeUser)
-                    .HasMaxLength(30)
-                    .HasColumnName("tipe_user")
-                    .IsFixedLength();
+                    .HasColumnType("character varying")
+                    .HasColumnName("tipe_user");
 
                 entity.Property(e => e.Username)
-                    .HasMaxLength(30)
-                    .HasColumnName("username")
-                    .IsFixedLength();
+                    .HasColumnType("character varying")
+                    .HasColumnName("username");
             });
 
             OnModelCreatingPartial(modelBuilder);

@@ -28,8 +28,10 @@
             <div class="form-group col-md-6">
                 <label asp-for="TipeUser">Tipe User</label>
                 <select class="form-control mb-3" asp-for="TipeUser" placeholder="Masukkan tipe user">
+                    <option>Select</option>
                     <option>Penjual</option>
-                    <option>Pembeli</option> </select>
+                    <option>Pembeli</option>
+                    <option>Admin</option> </select>
                 <span asp-validation-for="TipeUser" class=" alert-danger"></span>
             </div>
             

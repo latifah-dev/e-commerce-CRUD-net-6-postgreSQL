@@ -1,31 +1,30 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using PALUGADA.Models;
+using PALUGADA.Datas.Entities;
+using PALUGADA.Datas;
+using Microsoft.AspNetCore.Authorization;
 
 namespace PALUGADA.Controllers;
-
 public class HomeController : Controller
 {
-    private readonly ILogger<HomeController> _logger;
+    private readonly palugadaDBContext _dbContext;
 
-    public HomeController(ILogger<HomeController> logger)
+    public HomeController( palugadaDBContext dbContext)
     {
-        _logger = logger;
+        _dbContext = dbContext;
     }
 
     public IActionResult Index()
     {
-        return View();
+        IEnumerable<Barang> objCatlist = _dbContext.Barangs;
+            return View(objCatlist);
     }
 
+    public IActionResult Forbidden() {
+        return View();
+    }
     public IActionResult Privacy()
     {
         return View();
-    }
-
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
 }
