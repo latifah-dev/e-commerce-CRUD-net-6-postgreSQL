@@ -6,6 +6,7 @@ using PALUGADA.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace PALUGADA.Controllers;
+[Authorize(Roles="Admin")]
 public class PembeliController : Controller
 {
     private readonly palugadaDBContext _dbContext;

@@ -6,6 +6,7 @@ using PALUGADA.Models;
 using Microsoft.AspNetCore.Authorization;
 
 namespace PALUGADA.Controllers;
+[Authorize(Roles="Penjual")]
 public class BarangController : Controller
 {
     private readonly palugadaDBContext _dbContext;
@@ -28,6 +29,8 @@ public class BarangController : Controller
             }
             return View(empfromdb);
         }
+
+        [Authorize (Roles="Penjual")]
     public IActionResult Index()
     {
             IEnumerable<Barang> objCatlist = _dbContext.Barangs;
