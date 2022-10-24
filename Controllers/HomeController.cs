@@ -5,7 +5,6 @@ using PALUGADA.Datas;
 using Microsoft.AspNetCore.Authorization;
 
 namespace PALUGADA.Controllers;
-[Authorize]
 public class HomeController : Controller
 {
     private readonly palugadaDBContext _dbContext;
